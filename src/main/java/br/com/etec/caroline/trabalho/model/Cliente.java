@@ -4,39 +4,35 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "cliente")
-
-public class cliente {
+public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Integer idCliente;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer id;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        cliente cliente = (cliente) o;
-        return idCliente.equals(cliente.idCliente);
+        Cliente cliente = (Cliente) o;
+        return id.equals(cliente.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCliente);
+        return Objects.hash(id);
     }
 
     public Integer getId() {
-        return idCliente;
+        return id;
     }
 
     public void setId(Integer id) {
-        this.idCliente = id;
+        this.id = id;
     }
 
     private String nome;
@@ -51,6 +47,6 @@ public class cliente {
 
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
-    private List<contasPagar> contaCliente = new ArrayList<>();
+    private List<ContasPag> contaCliente = new ArrayList<>();
 
 }
