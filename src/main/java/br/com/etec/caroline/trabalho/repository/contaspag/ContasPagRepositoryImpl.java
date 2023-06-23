@@ -29,7 +29,7 @@ public class ContasPagRepositoryImpl implements ContasPagRepositoryQuery {
 
         Predicate[] predicates = criarRestricoes(contasPagFilter, builder, root);
         criteria.where(predicates);
-        criteria.orderBy(builder.asc(root.get("dataPag")));
+        criteria.orderBy(builder.asc(root.get("datapag")));
 
         TypedQuery<ContasPag> query = manager.createQuery(criteria);
         adicionarRestricoesDePaginacao(query, pageable);
@@ -44,7 +44,7 @@ public class ContasPagRepositoryImpl implements ContasPagRepositoryQuery {
 
         Predicate[] predicates = criarRestricoes(contasPagFilter, builder, root);
         criteria.where(predicates);
-        criteria.orderBy(builder.asc(root.get("dataPag")));
+        criteria.orderBy(builder.asc(root.get("datapag")));
 
         criteria.select(builder.count(root));
         return manager.createQuery(criteria).getSingleResult();
@@ -62,12 +62,12 @@ public class ContasPagRepositoryImpl implements ContasPagRepositoryQuery {
     private Predicate[] criarRestricoes(ContasPagFilter contasPagFilter, CriteriaBuilder builder, Root<ContasPag> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (contasPagFilter.getDataPag() != null) {
-            predicates.add(builder.greaterThanOrEqualTo(root.get("dataPag"), contasPagFilter.getDataPag()));
+        if (contasPagFilter.getDatapag() != null) {
+            predicates.add(builder.greaterThanOrEqualTo(root.get("datapag"), contasPagFilter.getDatapag()));
         }
 
-        if (contasPagFilter.getDataPag() != null) {
-            predicates.add(builder.lessThanOrEqualTo(root.get("dataVenc"), contasPagFilter.getDataVenc()));
+        if (contasPagFilter.getDatapag() != null) {
+            predicates.add(builder.lessThanOrEqualTo(root.get("datapag"), contasPagFilter.getDatapag()));
         }
 
         return predicates.toArray((new  Predicate[predicates.size()]));

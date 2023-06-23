@@ -9,17 +9,17 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "contaspagar")
+@Table(name = "contaspag")
 
 public class ContasPag {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idConta;
+    private Integer id;
 
-    private LocalDate dataPag;
+    private LocalDate datapag;
 
-    private LocalDate dataVenc;
+    private LocalDate datavenc;
 
     @ManyToOne
     @JoinColumn(name = "idcliente")
@@ -29,27 +29,27 @@ public class ContasPag {
 
 
   public Integer getIdConta() {
-    return idConta;
+    return id;
   }
 
   public void setIdConta(Integer idConta) {
-    this.idConta = idConta;
+    this.id = id;
   }
 
   public LocalDate getDataPag() {
-    return dataPag;
+    return datapag;
   }
 
   public void setDataPag(LocalDate dataPag) {
-    this.dataPag = dataPag;
+    this.datapag = dataPag;
   }
 
   public LocalDate getDataVenc() {
-    return dataVenc;
+    return datavenc;
   }
 
   public void setDataVenc(LocalDate dataVenc) {
-    this.dataVenc = dataVenc;
+    this.datavenc = dataVenc;
   }
 
   public Cliente getCliente() {
@@ -73,12 +73,12 @@ public class ContasPag {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContasPag contasPag = (ContasPag) o;
-    return idConta.equals(contasPag.idConta);
+    return id.equals(contasPag.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(idConta);
+    return Objects.hash(id);
   }
 
 }

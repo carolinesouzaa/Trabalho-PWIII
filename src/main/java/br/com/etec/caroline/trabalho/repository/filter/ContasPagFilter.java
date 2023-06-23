@@ -8,31 +8,27 @@ import java.time.LocalDate;
 public class ContasPagFilter {
 
   @DateTimeFormat(pattern = "yyyy/mm/dd")
-  private LocalDate dataPag;
+  private LocalDate datapag;
 
   @DateTimeFormat(pattern = "yyyy/mm/dd")
-  private LocalDate dataVenc;
+  private LocalDate datavenc;
 
   private BigDecimal valor;
 
-  public ContasPagFilter(LocalDate dataPag) {
-    this.dataPag = dataPag;
+  public LocalDate getDatapag() {
+    return datapag;
   }
 
-  public LocalDate getDataPag() {
-    return dataPag;
+  public void setDatapag(LocalDate datapag) {
+    this.datapag = datapag;
   }
 
-  public void setDataPag(LocalDate dataPag) {
-    this.dataPag = dataPag;
+  public LocalDate getDatavenc() {
+    return datavenc;
   }
 
-  public LocalDate getDataVenc() {
-    return dataVenc;
-  }
-
-  public void setDataVenc(LocalDate dataVenc) {
-    this.dataVenc = dataVenc;
+  public void setDatavenc(LocalDate datavenc) {
+    this.datavenc = datavenc;
   }
 
   public BigDecimal getValor() {
