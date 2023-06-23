@@ -7,11 +7,13 @@ import java.time.LocalDate;
 
 public class ContasPagFilter {
 
-  @DateTimeFormat(pattern = "yyyy/mm/dd")
+  @DateTimeFormat(pattern = "yyyy/MM/dd")
   private LocalDate datapag;
 
-  @DateTimeFormat(pattern = "yyyy/mm/dd")
+  @DateTimeFormat(pattern = "yyyy/MM/dd")
   private LocalDate datavenc;
+
+  private String nomecliente;
 
   private BigDecimal valor;
 
@@ -29,6 +31,14 @@ public class ContasPagFilter {
 
   public void setDatavenc(LocalDate datavenc) {
     this.datavenc = datavenc;
+  }
+
+  public String getNomecliente() {
+    return nomecliente;
+  }
+
+  public void setNomecliente(String nomecliente) {
+    this.nomecliente = nomecliente;
   }
 
   public BigDecimal getValor() {

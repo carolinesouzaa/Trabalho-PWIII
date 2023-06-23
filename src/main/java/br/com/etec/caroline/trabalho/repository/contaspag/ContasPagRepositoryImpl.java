@@ -2,9 +2,11 @@ package br.com.etec.caroline.trabalho.repository.contaspag;
 
 import br.com.etec.caroline.trabalho.model.ContasPag;
 import br.com.etec.caroline.trabalho.repository.filter.ContasPagFilter;
+import br.com.etec.caroline.trabalho.repository.projections.ResumoContas;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
@@ -22,41 +24,47 @@ public class ContasPagRepositoryImpl implements ContasPagRepositoryQuery {
     @PersistenceContext
     private EntityManager manager;
     @Override
-    public Page<ContasPag> filtrar(ContasPagFilter contasPagFilter, Pageable pageable) {
+    public Page<ResumoContas> filtrar(ContasPagFilter contasPagFilter, Pageable pageable) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
-        CriteriaQuery<ContasPag> criteria = builder.createQuery(ContasPag.class);
+        CriteriaQuery<ResumoContas> criteria = builder.createQuery(ResumoContas.class);
         Root<ContasPag> root = criteria.from(ContasPag.class);
 
-        Predicate[] predicates = criarRestricoes(contasPagFilter, builder, root);
-        criteria.where(predicates);
-        criteria.orderBy(builder.asc(root.get("datapag")));
+        criteria.select(builder.construct(ResumoContas.class
+                ,root.get("id")
+                ,root.get("data")
+                ,root.get("cliente").get("nomecliente")
+        ));
 
-        TypedQuery<ContasPag> query = manager.createQuery(criteria);
+        Predicate[] predicates = criarRestricoes(contasPagFilter , builder, root);
+        criteria.where(predicates);
+        criteria.orderBy(builder.asc(root.get("nomefilme")));
+
+        TypedQuery<ResumoContas> query = manager.createQuery(criteria);
         adicionarRestricoesDePaginacao(query, pageable);
 
-        return null;
+        return new PageImpl<>(query.getResultList(), pageable, total(contasPagFilter));
     }
 
-    private Long total(ContasPagFilter contasPagFilter){
+    private void adicionarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
+        int paginaAtual = pageable.getPageNumber();
+        int totalRegistroPorPagina = pageable.getPageSize();
+        int primeiroRegistroDaPagina = paginaAtual * totalRegistroPorPagina;
+
+        query.setFirstResult(primeiroRegistroDaPagina);
+        query.setMaxResults(totalRegistroPorPagina);
+    }
+
+    private Long total(ContasPagFilter contasPagFilter) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<ContasPag> root = criteria.from(ContasPag.class);
 
         Predicate[] predicates = criarRestricoes(contasPagFilter, builder, root);
         criteria.where(predicates);
-        criteria.orderBy(builder.asc(root.get("datapag")));
+        criteria.orderBy(builder.asc(root.get("data")));
 
         criteria.select(builder.count(root));
         return manager.createQuery(criteria).getSingleResult();
-    }
-
-    private void adicionarRestricoesDePaginacao(TypedQuery<ContasPag> query, Pageable pageable) {
-        int paginaAtual = pageable.getPageNumber();
-        int totalRegristrosPorPagina = pageable.getPageSize();
-        int primeiroRegistroDaPagina = paginaAtual * totalRegristrosPorPagina;
-
-        query.setFirstResult(primeiroRegistroDaPagina);
-        query.setMaxResults(totalRegristrosPorPagina);
     }
 
     private Predicate[] criarRestricoes(ContasPagFilter contasPagFilter, CriteriaBuilder builder, Root<ContasPag> root) {
