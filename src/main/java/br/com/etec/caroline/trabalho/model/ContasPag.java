@@ -4,6 +4,7 @@ import com.mysql.cj.xdevapi.Client;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -16,9 +17,9 @@ public class ContasPag {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idConta;
 
-    private Date dataPag;
+    private LocalDate dataPag;
 
-    private Date dataVenc;
+    private LocalDate dataVenc;
 
     @ManyToOne
     @JoinColumn(name = "idcliente")
@@ -35,19 +36,19 @@ public class ContasPag {
     this.idConta = idConta;
   }
 
-  public Date getDataPag() {
+  public LocalDate getDataPag() {
     return dataPag;
   }
 
-  public void setDataPag(Date dataPag) {
+  public void setDataPag(LocalDate dataPag) {
     this.dataPag = dataPag;
   }
 
-  public Date getDataVenc() {
+  public LocalDate getDataVenc() {
     return dataVenc;
   }
 
-  public void setDataVenc(Date dataVenc) {
+  public void setDataVenc(LocalDate dataVenc) {
     this.dataVenc = dataVenc;
   }
 
@@ -79,4 +80,5 @@ public class ContasPag {
   public int hashCode() {
     return Objects.hash(idConta);
   }
+
 }

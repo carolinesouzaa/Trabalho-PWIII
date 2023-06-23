@@ -1,25 +1,37 @@
 package br.com.etec.caroline.trabalho.repository.filter;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ContasPagFilter {
 
-  private Date dataPag;
+  @DateTimeFormat(pattern = "yyyy/mm/dd")
+  private LocalDate dataPag;
 
-  public Date getDataPag() {
-    return dataPag;
-  }
+  @DateTimeFormat(pattern = "yyyy/mm/dd")
+  private LocalDate dataVenc;
 
-  public void setDataPag(Date dataPag) {
+  private BigDecimal valor;
+
+  public ContasPagFilter(LocalDate dataPag) {
     this.dataPag = dataPag;
   }
 
-  public Date getDataVenc() {
+  public LocalDate getDataPag() {
+    return dataPag;
+  }
+
+  public void setDataPag(LocalDate dataPag) {
+    this.dataPag = dataPag;
+  }
+
+  public LocalDate getDataVenc() {
     return dataVenc;
   }
 
-  public void setDataVenc(Date dataVenc) {
+  public void setDataVenc(LocalDate dataVenc) {
     this.dataVenc = dataVenc;
   }
 
@@ -30,9 +42,4 @@ public class ContasPagFilter {
   public void setValor(BigDecimal valor) {
     this.valor = valor;
   }
-
-  private Date dataVenc;
-
-  private BigDecimal valor;
-
 }

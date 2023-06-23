@@ -67,7 +67,7 @@ public class ContasPagRepositoryImpl implements ContasPagRepositoryQuery {
         }
 
         if (contasPagFilter.getDataPag() != null) {
-            predicates.add(builder.lessThanOrEqualTo(root.get("dataPag"), contasPagFilter.getDataPag()));
+            predicates.add(builder.lessThanOrEqualTo(root.get("dataVenc"), contasPagFilter.getDataVenc()));
         }
 
         return predicates.toArray((new  Predicate[predicates.size()]));
