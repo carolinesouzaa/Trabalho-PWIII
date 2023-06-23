@@ -1,17 +1,17 @@
-CREATE TABLE CLIENTE (
-    ID      INT             NOT NULL    AUTO_INCREMENT      PRIMARY KEY,
-    NOME    VARCHAR(100)    NOT NULL
+create table cliente (
+    id      int             not null    auto_increment      primary key,
+    nome    varchar(100)    not null
 );
 
-CREATE TABLE CONTASPAG (
-    ID          INT             NOT NULL    AUTO_INCREMENT      PRIMARY KEY,
-    DATA        DATE            NOT NULL,
-    DATA_EXP    DATE            NOT NULL,
-    IDCLIENTE    INT,
-    VALOR       DECIMAL(12, 2)
+create table contaspag (
+    id          int             not null    auto_increment      primary key,
+    data        date            not null,
+    data_exp    date            not null,
+    idcliente    int,
+    valor       decimal(12, 2)
 );
 
-ALTER TABLE CONTASPAG ADD CONSTRAINT FK_CONTASPAG_CLIENTE FOREIGN KEY(IDCLIENTE) REFERENCES CLIENTE(ID);
+alter table contaspag add constraint fk_contaspag_cliente foreign key(idcliente) references cliente(id);
 
-INSERT INTO CLIENTE(NOME) VALUES ("Carol");
-INSERT INTO CONTASPAG(DATA, DATA_EXP, IDCLIENTE, VALOR) VALUES ("2006/08/18", "2006/09/18", 1, 199.90);
+insert into cliente(nome) values ("carol");
+insert into contaspag(data, data_exp, idcliente, valor) values ("2006/08/18", "2006/09/18", 1, 199.90);
