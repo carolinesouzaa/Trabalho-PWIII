@@ -4,6 +4,7 @@ import br.com.etec.caroline.trabalho.model.Cliente;
 import br.com.etec.caroline.trabalho.repository.filter.ClienteFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
@@ -33,7 +34,7 @@ public class ClienteRepositoryImpl implements ClienteRepositoryQuery {
         TypedQuery<Cliente> query = manager.createQuery(criteria);
         adicionarRestricoesDePaginacao(query, pageable);
 
-        return null;
+        return new PageImpl<>(query.getResultList(), pageable, total(clienteFilter));
     }
 
     private Long total(ClienteFilter clienteFilter){

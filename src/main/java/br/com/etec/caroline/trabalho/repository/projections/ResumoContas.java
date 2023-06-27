@@ -1,40 +1,62 @@
 package br.com.etec.caroline.trabalho.repository.projections;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class ResumoContas {
 
-    private Long id;
-    private String nomecliente;
-    private Date data;
+    private Integer id;
+    private LocalDate datapag;
+    private LocalDate datavenc;
+    private BigDecimal valor;
+    private String nome;
 
-    public ResumoContas(Long id, Date data, String nomecliente) {
+
+    public ResumoContas(Integer id, LocalDate datapag, LocalDate datavenc, BigDecimal valor, String nome) {
         this.id = id;
-        this.data = data;
-        this.nomecliente = nomecliente;
+        this.datapag = datapag;
+        this.datavenc = datavenc;
+        this.valor = valor;
+        this.nome = nome;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getNomecliente() {
-        return nomecliente;
+    public LocalDate getDatapag() {
+        return datapag;
     }
 
-    public void setNomecliente(String nomecliente) {
-        this.nomecliente = nomecliente;
+    public void setDatapag(LocalDate datapag) {
+        this.datapag = datapag;
     }
 
-    public Date getData() {
-        return data;
+    public LocalDate getDatavenc() {
+        return datavenc;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDatavenc(LocalDate datavenc) {
+        this.datavenc = datavenc;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

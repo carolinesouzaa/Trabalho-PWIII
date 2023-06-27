@@ -15,3 +15,5 @@ alter table contaspag add constraint fk_contaspag_cliente foreign key(idcliente)
 
 insert into cliente(nome) values ("carol");
 insert into contaspag(datapag, datavenc, idcliente, valor) values ("2006/08/18", "2006/09/18", 1, 199.90);
+
+

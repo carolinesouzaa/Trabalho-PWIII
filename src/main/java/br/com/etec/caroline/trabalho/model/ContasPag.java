@@ -16,48 +16,32 @@ public class ContasPag {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private LocalDate datapag;
-
     private LocalDate datavenc;
-
-    @ManyToOne
-    @JoinColumn(name = "idcliente")
-    private Cliente cliente;
-
     private BigDecimal valor;
 
-
-  public Integer getIdConta() {
+  public Integer getId() {
     return id;
   }
 
-  public void setIdConta(Integer idConta) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
-  public LocalDate getDataPag() {
+  public LocalDate getDatapag() {
     return datapag;
   }
 
-  public void setDataPag(LocalDate dataPag) {
-    this.datapag = dataPag;
+  public void setDatapag(LocalDate datapag) {
+    this.datapag = datapag;
   }
 
-  public LocalDate getDataVenc() {
+  public LocalDate getDatavenc() {
     return datavenc;
   }
 
-  public void setDataVenc(LocalDate dataVenc) {
-    this.datavenc = dataVenc;
-  }
-
-  public Cliente getCliente() {
-    return cliente;
-  }
-
-  public void setCliente(Cliente cliente) {
-    this.cliente = cliente;
+  public void setDatavenc(LocalDate datavenc) {
+    this.datavenc = datavenc;
   }
 
   public BigDecimal getValor() {
@@ -81,4 +65,15 @@ public class ContasPag {
     return Objects.hash(id);
   }
 
+  @ManyToOne
+    @JoinColumn(name = "idcliente")
+    private Cliente cliente;
+
+  public Cliente getCliente() {
+    return cliente;
+  }
+
+  public void setCliente(Cliente cliente) {
+    this.cliente = cliente;
+  }
 }
